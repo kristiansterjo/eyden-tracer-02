@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 // Geaometrical Primitives base abstract class
 // Written by Sergey Kosov in 2005 for Rendering Competition
 #pragma once

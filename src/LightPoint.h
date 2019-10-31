@@ -1,6 +1,8 @@
+//Kristian Sterjo & Albrit Bendo
 #pragma once
 
 #include "ILight.h"
+using namespace std;
 
 /**
  * @brief Point light source class
@@ -22,7 +24,13 @@ public:
 	virtual std::optional<Vec3f> Illuminate(Ray& ray) override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		ray.dir = normalize(m_position - ray.org);
+
+		ray.t   = ray.dir.dot(ray.dir);
+
+		auto k = make_optional<Vec3f>(0.25 * m_intensity/Pif );
+
+		return k;
 	}
 
 

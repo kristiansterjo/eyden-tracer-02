@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 // Triangle Geaometrical Primitive class
 // Written by Sergey Kosov in 2005 for Rendering Competition
 #pragma once
@@ -60,7 +61,10 @@ public:
 	virtual Vec3f GetNormal(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		//getting the normal by taking the cross product of the edges 
+		//of the triangle
+		auto k = normalize((m_b-m_a).cross(m_c - m_a));
+		return k; 
 	}
 	
 private:

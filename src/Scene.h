@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 #pragma once
 
 #include "ILight.h"
@@ -28,6 +29,7 @@ public:
 	void Add(const std::shared_ptr<CPrim> pPrim)
 	{
 		// --- PUT YOUR CODE HERE ---
+		m_vpPrims.push_back(pPrim); // Adding to pPrim
 	}
 	/**
 	 * @brief Adds a new light to the scene
@@ -36,6 +38,7 @@ public:
 	void Add(const std::shared_ptr<ILight> pLight)
 	{
 		// --- PUT YOUR CODE HERE ---
+		m_vpLights.push_back(pLight);
 	}
   
 	/**
@@ -47,7 +50,23 @@ public:
 	bool Intersect(Ray& ray) const
 	{
 		// --- PUT YOUR CODE HERE ---
-		return false;
+		for(auto prim : m_vpPrims){
+
+			if(prim->Intersect(ray)==1){
+
+				ray.hit = prim.get();
+
+			}
+		}
+		bool b1;
+		if(ray.hit == nullptr){
+			b1 = false;
+		}
+		else{
+			b1 = true;
+		} 
+		return b1;
+
 	}
 
 	/**
@@ -56,6 +75,13 @@ public:
 	bool Occluded(Ray& ray)
 	{
 		// --- PUT YOUR CODE HERE ---
+		for(auto prim : m_vpPrims) {
+
+			if(prim->Intersect(ray)==1) {
+
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -66,10 +92,17 @@ public:
 	Vec3f RayTrace(Ray& ray) const
 	{
 		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		if(Intersect(ray)==1){
+
+			return ray.hit->getShader()->Shade(ray);
+		}
+		else{
+
+			return m_bgColor;
+		}
 	}
 
-
+// Just to make us confused with 2 public classes ;O
 public:
 	std::unique_ptr<CCameraPerspective>		m_pCamera;
 	std::vector<std::shared_ptr<ILight>>	m_vpLights;						///< lights

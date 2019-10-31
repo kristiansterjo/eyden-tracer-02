@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 // Perspective Camera class
 // Written by Sergey Kosov in 2005 for Rendering Competition
 #pragma once
@@ -47,6 +48,7 @@ public:
 		float sscy = 2 * (y + dy) / getResolution().height - 1;
 		
 		ray.org = m_pos;
+		ray.hit = nullptr;
 		ray.dir = normalize(m_aspect * sscx * m_xAxis + sscy * m_yAxis + m_focus * m_zAxis);
 		ray.t = std::numeric_limits<float>::infinity();
 	}
@@ -65,4 +67,3 @@ private:
 	Vec3f m_zAxis;
 	float m_aspect;		///< image aspect ratio
 };
-

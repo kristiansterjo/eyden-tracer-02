@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 #pragma once
 
 #include "ShaderFlat.h"
@@ -29,7 +30,37 @@ public:
 	virtual Vec3f Shade(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return RGB(0, 0, 0);
+
+        int n=1;
+		Vec3f diff = 0;
+		Vec3f spec = 0;
+		
+		Ray photon;
+		photon.org = ray.org + (ray.t*ray.dir);
+		
+		for(auto light : m_scene.m_vpLights){
+            for(int i=0;i<n;i++){
+				auto x = light->Illuminate(photon);
+				if(!x){
+					continue;
+                }
+                
+                if( m_scene.Occluded(photon)){
+                    continue;
+                }
+
+                //following the methods for calculating the reflected ray from the lecture slides
+				Vec3f incident	= photon.dir;
+				Vec3f reflected = 2 * incident.dot( ray.hit->GetNormal(ray) ) * (ray.hit->GetNormal(ray)) - incident;
+				diff = diff + (*x) * std::max(0.f, incident.dot(ray.hit->GetNormal(ray)));
+				spec = spec + (*x) * std::pow(std::max(0.f, reflected.dot((-1)*ray.dir)), m_ke);
+            }
+        }
+
+        auto k = m_ka * CShaderFlat::Shade(ray) * 1.1 + m_kd * CShaderFlat::Shade(ray).mul(diff/n) + m_ks * RGB(1, 1, 1).mul(spec/n);
+
+		return  k;
+        
 	}
 
 	

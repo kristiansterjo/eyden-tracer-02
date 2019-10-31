@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 // Sphere Geaometrical Primitive class
 // Written by Sergey Kosov in 2005 for Rendering Competition
 #pragma once
@@ -56,11 +57,13 @@ public:
 	virtual Vec3f GetNormal(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+
+		auto k = normalize(ray.org - m_center + (ray.dir*ray.t) );
+
+		return k;
 	}
 	
 private:
 	Vec3f m_center;	///< Position of the center of the sphere
 	float m_radius;	///< Radius of the sphere
 };
-

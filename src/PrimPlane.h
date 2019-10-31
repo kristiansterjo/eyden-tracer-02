@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 // Plane Geaometrical Primitive class
 // Written by Sergey Kosov in 2005 for Rendering Competition
 #pragma once
@@ -35,7 +36,8 @@ public:
 	virtual Vec3f GetNormal(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+
+		return m_normal;
 	}
 	
 private:

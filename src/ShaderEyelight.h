@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 #pragma once
 
 #include "ShaderFlat.h"
@@ -22,7 +23,12 @@ public:
 	virtual Vec3f Shade(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return RGB(0, 0, 0);
+
+		Vec3f m_color = CShaderFlat::Shade(ray);
+
+		float angle = ray.hit->GetNormal(ray).dot(ray.dir);
+
+		auto k =  m_color * abs(angle);
+		return k;
 	}
 };
-

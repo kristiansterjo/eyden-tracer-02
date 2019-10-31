@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 #pragma once
 
 #include "types.h"

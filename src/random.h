@@ -1,3 +1,4 @@
+//Kristian Sterjo & Albrit Bendo
 // Random numbers generation
 // Written by Sergey G. Kosov in 2013 for Project X
 // Simplified (C++11) by Sergey G. Kosov in 2016 for Project X
@@ -101,4 +102,3 @@ namespace DirectGraphicalModels
 
 	}
 }
-
